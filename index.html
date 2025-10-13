@@ -261,14 +261,11 @@
             </div>
         </div>
     </footer>
-
-    <audio src=".\bgm\br.mp3" style="display: none;"></audio>
-
-
-    <!-- // 播放音乐代码
+    <script>
+    // 播放音乐代码
             let isPlay = false
             const audio = document.querySelector('audio')
-            const bgmList = ['./bgm/br.mp3', './bgm/br2.mp3', './bgm/br3.mp3', './bgm/br4.mp3']
+            // const bgmList = ['./bgm/br.mp3', './bgm/br2.mp3', './bgm/br3.mp3', './bgm/br4.mp3']
 
             function selectRandomBgm() {
                 const randomIndex = Math.floor(Math.random() * bgmList.length)
@@ -313,11 +310,11 @@
                             console.error('fuck 360 browser:', error)
                         })
                 }
-            }) -->
+            })
 
-    <!-- // const authToken = localStorage.getItem('authToken');
+    // const authToken = localStorage.getItem('authToken');
             
-            fetch('ztg.txt')
+            fetch('nztg.txtn')
                 .then(response => response.text())
                 .then(text => {
                     const lines = text.split('\n');
@@ -336,7 +333,10 @@
                             if (samValue < 50) {
                                 alert('SAM值过低请立即饮用杏仁水');
                                 console.log('SAM值过低', line);
-                            } -->
+                            }
+                        }
+                    }})
+    </script>
     <script>
         window.addEventListener('DOMContentLoaded', function() {
             const alertDiv = document.createElement('div');
@@ -359,7 +359,7 @@
                 setTimeout(() => alertDiv.remove(), 500);
             }, 5000);
         });
-        
+
         document.getElementById('a').addEventListener('click', function(e) {
             e.preventDefault();
             const alertDiv = document.createElement('div');
@@ -391,7 +391,6 @@
         document.getElementById('DefaultAI').textContent = ai;
         document.getElementById('Backpack').textContent = backpack;
         // }
-        // }
 
         // 添加退出登录功能
         document.getElementById('OutLogout').addEventListener('click', function (e) {
@@ -400,11 +399,8 @@
             location.reload();
         });
     </script>
-    <!-- })
-                                .catch(error => {
-                                    console.error('读取ztg.txt出错:', error);
-                                }); -->
     <p class="tit">&copy;2025 10 12停止 ZTG 网站 <strong>允许借鉴使用</strong></p>
+    
 </body>
 
 <style>
