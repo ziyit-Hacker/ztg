@@ -521,9 +521,16 @@
 
     .delete {
         filter: blur(5px);
+        -webkit-filter: blur(5px); /* 添加webkit前缀确保兼容性 */
         position: relative;
     }
     
+    @media (max-width: 768px) {
+        .delete {
+            filter: blur(3px) !important; /* 移动端使用较小的模糊值 */
+            -webkit-filter: blur(3px) !important;
+        }
+    }
     .delete::after {
         content: "";
         position: absolute;
