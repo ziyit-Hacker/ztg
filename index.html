@@ -177,7 +177,7 @@
     <div class="box">
         <ul class="pod">
             <li><a href="./user/" class="delete">登录</a></li>
-            <li><a href="https://backrooms-wiki-cn.wikidot.com/normal-levels-i#t" class="delete">查看层级列表</a></li>
+            <li><a href="#a" id="a" class="delete">查看层级列表</a></li>
             <li><a href="#" id="OutLogout" class="delete">退出登录</a></li>
             <li class="line" class="delete"></li>
             <li><a href="https://ziyit-hacker.github.io/tas/" target="_blank">前往官网</a></li>
@@ -190,9 +190,11 @@
         <span class="delete"> </span>
         <strong><span style="color: black;" class="delete">SAM: <span id="samDisplay">0</span></span></strong>
         <span class="delete"> </span>
-        <strong><span style="color: black;" class="delete">生命值(当前生命值/最大生命值): <span id="hpDisplay">0/0</span></span></strong>
+        <strong><span style="color: black;" class="delete">生命值(当前生命值/最大生命值): <span
+                    id="hpDisplay">0/0</span></span></strong>
         <span class="delete"> </span>
-        <strong><span style="color: black;" class="delete">饱食度(饱和度/饱食度): <span id="satietyDisplay">0/0</span></span></strong>
+        <strong><span style="color: black;" class="delete">饱食度(饱和度/饱食度): <span
+                    id="satietyDisplay">0/0</span></span></strong>
         <span class="delete"> </span>
         <strong><span style="color: black;" class="delete">所在层级: <span id="Levels">Lobby</span></span></strong>
         <span class="delete"> </span>
@@ -239,7 +241,8 @@
     </div>
 
     <footer style="background: rgba(0,0,0,0.5); padding: 20px; margin-top: 50px;" class="delete">
-        <div class="delete" style="max-width: 1000px; margin: 0 auto; display: flex; justify-content: space-between; flex-wrap: wrap;">
+        <div class="delete"
+            style="max-width: 1000px; margin: 0 auto; display: flex; justify-content: space-between; flex-wrap: wrap;">
             <div style="width: 300px; margin-bottom: 20px;" class="delete">
                 <h3 style="color: black;" class="delete">关于我们</h3>
                 <p style="color: #aaa;" class="delete">只因科技致力于提供优质的游戏服务和体验</p>
@@ -252,8 +255,8 @@
             </div>
             <div style="width: 300px; margin-bottom: 20px;" class="delete">
                 <h3 style="color: black;" class="delete">关注我们</h3>
-                <a href="https://space.bilibili.com/3546981356013833"
-                    style="color: #132251; margin-right: 10px;" class="delete">哔哩哔哩</a>
+                <a href="https://space.bilibili.com/3546981356013833" style="color: #132251; margin-right: 10px;"
+                    class="delete">哔哩哔哩</a>
                 <p style="color: #132251;" class="delete">QQ: 3950140506</p>
             </div>
         </div>
@@ -261,127 +264,147 @@
 
     <audio src=".\bgm\br.mp3" style="display: none;"></audio>
 
-    <script>
-        // 播放音乐代码
-        let isPlay = false
-        const audio = document.querySelector('audio')
-        const bgmList = ['./bgm/br.mp3', './bgm/br2.mp3', './bgm/br3.mp3', './bgm/br4.mp3']
 
-        function selectRandomBgm() {
-            const randomIndex = Math.floor(Math.random() * bgmList.length)
-            return bgmList[randomIndex]
-        }
+    <!-- // 播放音乐代码
+            let isPlay = false
+            const audio = document.querySelector('audio')
+            const bgmList = ['./bgm/br.mp3', './bgm/br2.mp3', './bgm/br3.mp3', './bgm/br4.mp3']
 
-        audio.loop = false
+            function selectRandomBgm() {
+                const randomIndex = Math.floor(Math.random() * bgmList.length)
+                return bgmList[randomIndex]
+            }
 
-        audio.addEventListener('ended', () => {
-            audio.src = selectRandomBgm()
-            audio.play().catch((error) => {
-                console.error('fuck microsoft edge and google chrome: ', error)
-            })
-        })
+            audio.loop = false
 
-        const playAudioOnInteraction = () => {
-            if (!isPlay) {
+            audio.addEventListener('ended', () => {
                 audio.src = selectRandomBgm()
-                audio.play()
-                    .then(() => {
-                        isPlay = true
-                        document.removeEventListener('mousemove', playAudioOnInteraction)
-                    })
-                    .catch((error) => {
-                        console.error('fuck user:', error)
-                    })
-            }
-        }
+                audio.play().catch((error) => {
+                    console.error('fuck microsoft edge and google chrome: ', error)
+                })
+            })
 
-        document.addEventListener('mousemove', playAudioOnInteraction)
-
-        audio.addEventListener('click', () => {
-            if (isPlay) {
-                audio.pause()
-                isPlay = false
-            } else {
-                audio.play()
-                    .then(() => {
-                        isPlay = true
-                    })
-                    .catch((error) => {
-                        console.error('fuck 360 browser:', error)
-                    })
-            }
-        })
-        
-        const authToken = localStorage.getItem('authToken');
-        
-        fetch('ztg.txt')
-            .then(response => response.text())
-            .then(text => {
-                const lines = text.split('\n');
-                const [_, username] = authToken.split('-');
-                
-                if (!username) {
-                    console.error('请登录');
-                    return;
+            const playAudioOnInteraction = () => {
+                if (!isPlay) {
+                    audio.src = selectRandomBgm()
+                    audio.play()
+                        .then(() => {
+                            isPlay = true
+                            document.removeEventListener('mousemove', playAudioOnInteraction)
+                        })
+                        .catch((error) => {
+                            console.error('fuck user:', error)
+                        })
                 }
-                for (const line of lines) {
-                    const [lineUsername, exp, sam, hp, satiety, level, ai, backpack] = line.split(' - ');
-                    if (lineUsername.trim() === username.trim()) {
+            }
 
-                        // 检查SAM值
-                        const samValue = parseInt(sam);
-                        if (samValue < 50) {
-                            alert('SAM值过低请立即饮用杏仁水');
-                            console.log('SAM值过低', line);
-                        }
+            document.addEventListener('mousemove', playAudioOnInteraction)
 
-                        // 创建美观的提示框
-                        const alertDiv = document.createElement('div');
-                        alertDiv.style.position = 'fixed';
-                        alertDiv.style.top = '20px';
-                        alertDiv.style.left = '50%';
-                        alertDiv.style.transform = 'translateX(-50%)';
-                        alertDiv.style.padding = '15px 25px';
-                        alertDiv.style.backgroundColor = '#ffeb3b';
-                        alertDiv.style.color = '#000';
-                        alertDiv.style.borderRadius = '5px';
-                        alertDiv.style.boxShadow = '0 4px 8px rgba(0,0,0,0.2)';
-                        alertDiv.style.zIndex = '1000';
-                        alertDiv.style.animation = 'fadeIn 0.5s';
-                        alertDiv.innerHTML = '数据已从ZTG服务器迁移至ZIYIT根服务器，本网页已经停止支持，无法正常使用，请前往官网，数据已迁移至ZIYIT根服务器。本界面将在不在更新，建议前往官网查看最新内容。';
-                        document.body.appendChild(alertDiv);
-                        
-                        // 5秒后自动消失
-                        setTimeout(() => {
-                            alertDiv.style.animation = 'fadeOut 0.5s';
-                            setTimeout(() => alertDiv.remove(), 500);
-                        }, 5000);
+            audio.addEventListener('click', () => {
+                if (isPlay) {
+                    audio.pause()
+                    isPlay = false
+                } else {
+                    audio.play()
+                        .then(() => {
+                            isPlay = true
+                        })
+                        .catch((error) => {
+                            console.error('fuck 360 browser:', error)
+                        })
+                }
+            }) -->
 
-                        // 填充数据
-                        document.getElementById('expDisplay').textContent = exp;
-                        document.getElementById('samDisplay').textContent = sam;
-                        document.getElementById('hpDisplay').textContent = hp;
-                        document.getElementById('satietyDisplay').textContent = satiety;
-                        document.getElementById('Levels').textContent = level;
-                        document.getElementById('DefaultAI').textContent = ai;
-                        document.getElementById('Backpack').textContent = backpack;
-                        break;
+    <!-- // const authToken = localStorage.getItem('authToken');
+            
+            fetch('ztg.txt')
+                .then(response => response.text())
+                .then(text => {
+                    const lines = text.split('\n');
+                    const [_, username] = authToken.split('-');
+                    
+                    if (!username) {
+                        console.error('请登录');
+                        return;
                     }
-                }
+                    for (const line of lines) {
+                        const [lineUsername, exp, sam, hp, satiety, level, ai, backpack] = line.split(' - ');
+                        if (lineUsername.trim() === username.trim()) {
 
-                // 添加退出登录功能
-                document.getElementById('OutLogout').addEventListener('click', function(e) {
-                    e.preventDefault();
-                    localStorage.removeItem('authToken');
-                    location.reload();
-                });
-                
-                            })
-                            .catch(error => {
-                                console.error('读取ztg.txt出错:', error);
-                            });
+                            // 检查SAM值
+                            const samValue = parseInt(sam);
+                            if (samValue < 50) {
+                                alert('SAM值过低请立即饮用杏仁水');
+                                console.log('SAM值过低', line);
+                            } -->
+    <script>
+        window.addEventListener('DOMContentLoaded', function() {
+            const alertDiv = document.createElement('div');
+            alertDiv.style.position = 'fixed';
+            alertDiv.style.top = '20px';
+            alertDiv.style.left = '50%';
+            alertDiv.style.transform = 'translateX(-50%)';
+            alertDiv.style.padding = '15px 25px';
+            alertDiv.style.backgroundColor = '#ffeb3b';
+            alertDiv.style.color = '#000';
+            alertDiv.style.borderRadius = '5px';
+            alertDiv.style.boxShadow = '0 4px 8px rgba(0,0,0,0.2)';
+            alertDiv.style.zIndex = '1000';
+            alertDiv.style.animation = 'fadeIn 0.5s';
+            alertDiv.innerHTML = '数据已从ZTG服务器迁移至ZIYIT根服务器，本网页已经停止支持，无法正常使用，请前往官网，数据已迁移至ZIYIT根服务器。本界面将在不在更新，建议前往官网查看最新内容。';
+            document.body.appendChild(alertDiv);
+        
+            setTimeout(() => {
+                alertDiv.style.animation = 'fadeOut 0.5s';
+                setTimeout(() => alertDiv.remove(), 500);
+            }, 5000);
+        });
+        
+        document.getElementById('a').addEventListener('click', function(e) {
+            e.preventDefault();
+            const alertDiv = document.createElement('div');
+            alertDiv.style.position = 'fixed';
+            alertDiv.style.top = '20px';
+            alertDiv.style.left = '50%';
+            alertDiv.style.transform = 'translateX(-50%)';
+            alertDiv.style.padding = '15px 25px';
+            alertDiv.style.backgroundColor = '#ffeb3b';
+            alertDiv.style.color = '#000';
+            alertDiv.style.borderRadius = '5px';
+            alertDiv.style.boxShadow = '0 4px 8px rgba(0,0,0,0.2)';
+            alertDiv.style.zIndex = '1000';
+            alertDiv.style.animation = 'fadeIn 0.5s';
+            alertDiv.innerHTML = '数据已从ZTG服务器迁移至ZIYIT根服务器，本网页已经停止支持，无法正常使用，请前往官网，数据已迁移至ZIYIT根服务器。本界面将在不在更新，建议前往官网查看最新内容。';
+            document.body.appendChild(alertDiv);
+        
+            setTimeout(() => {
+                alertDiv.style.animation = 'fadeOut 0.5s';
+                setTimeout(() => alertDiv.remove(), 500);
+            }, 5000);
+        });
+
+        document.getElementById('expDisplay').textContent = exp;
+        document.getElementById('samDisplay').textContent = sam;
+        document.getElementById('hpDisplay').textContent = hp;
+        document.getElementById('satietyDisplay').textContent = satiety;
+        document.getElementById('Levels').textContent = level;
+        document.getElementById('DefaultAI').textContent = ai;
+        document.getElementById('Backpack').textContent = backpack;
+        // }
+        // }
+
+        // 添加退出登录功能
+        document.getElementById('OutLogout').addEventListener('click', function (e) {
+            e.preventDefault();
+            localStorage.removeItem('authToken');
+            location.reload();
+        });
     </script>
-    <p class="tit">&copy;2025 10 12停止 ZTG <strong>允许借鉴使用</strong></p>
+    <!-- })
+                                .catch(error => {
+                                    console.error('读取ztg.txt出错:', error);
+                                }); -->
+    <p class="tit">&copy;2025 10 12停止 ZTG 网站 <strong>允许借鉴使用</strong></p>
 </body>
 
 <style>
@@ -510,27 +533,42 @@
     }
 
     @keyframes fadeIn {
-        from { opacity: 0; transform: translateX(-50%) translateY(-20px); }
-        to { opacity: 1; transform: translateX(-50%) translateY(0); }
+        from {
+            opacity: 0;
+            transform: translateX(-50%) translateY(-20px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
     }
 
     @keyframes fadeOut {
-        from { opacity: 1; }
-        to { opacity: 0; }
+        from {
+            opacity: 1;
+        }
+
+        to {
+            opacity: 0;
+        }
     }
 
     .delete {
         filter: blur(5px);
-        -webkit-filter: blur(5px); /* 添加webkit前缀确保兼容性 */
+        -webkit-filter: blur(5px);
+        /* 添加webkit前缀确保兼容性 */
         position: relative;
     }
-    
+
     @media (max-width: 768px) {
         .delete {
-            filter: blur(3px) !important; /* 移动端使用较小的模糊值 */
+            filter: blur(3px) !important;
+            /* 移动端使用较小的模糊值 */
             -webkit-filter: blur(3px) !important;
         }
     }
+
     .delete::after {
         content: "";
         position: absolute;
@@ -544,3 +582,13 @@
 </style>
 
 </html>
+<!-- 
+    只因科技出品
+    只因游戏 - ZIYIT
+    官方网站: https://ziyit-hacker.github.io/tas/
+    联系邮箱: 3950140506@qq.com
+    联系电话: 13258227085
+    版权归只因科技所有，允许借鉴使用
+    2024 - 2025
+    最后更新: 2025年10月12日
+-->
