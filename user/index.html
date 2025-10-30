@@ -4,8 +4,8 @@
 <head>
     <meta charset="utf-8">
     <title>登录只因科技(中国)</title>
-    <link rel="icon" href="ziyit.png" type="image/x-icon">
-    <script src="f12check.js"></script>
+    <link rel="icon" href="../assets/ziyit.png" type="image/x-icon">
+    <script src="../assets/f12check.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         @media (max-width: 768px) {
@@ -133,32 +133,13 @@
             background-color: #005a9e;
         }
 
-        .delete {
-            filter: blur(5px);
-            -webkit-filter: blur(5px); /* 添加webkit前缀确保兼容性 */
-            position: relative;
-        }
-        
-        @media (max-width: 768px) {
-            .delete {
-                filter: blur(3px) !important; /* 移动端使用较小的模糊值 */
-                -webkit-filter: blur(3px) !important;
-            }
-        }
-        .delete::after {
-            content: "";
-            position: absolute;
-            top: 50%;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background-color: red;
-            transform: rotate(-5deg);
+        * {
+            cursor: default !important;
         }
     </style>
 </head>
 
-<body background="./bg.jpg" style=" background-repeat:no-repeat ;
+<body background="../assets/bgl.jpg" style=" background-repeat:no-repeat ;
         background-size:100% 100%;
         background-attachment: fixed;">
     <script>
@@ -169,34 +150,34 @@
     </script>
     <div id="form-container"
         style="max-width: 400px; margin: 20px auto; padding: 20px; background: white; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
-        <h1 id="up" class="bt" style="font-size: 24px; margin-bottom: 20px;">登录(已关闭)</h1>
+        <h1 id="up" class="bt" style="font-size: 24px; margin-bottom: 20px;">登录</h1>
 
         <form method="get" autocomplete="off">
             <a href="../" style="color: #0078d4; text-decoration: none;">返回首页</a>
-            <div style="margin-bottom: 16px;" class="delete">
-                <label for="accountType" class="bt delete">账号类型</label>
-                <select class="delete" id="accountType"
+            <div style="margin-bottom: 16px;">
+                <label for="accountType" class="bt">账号类型</label>
+                <select id="accountType"
                     style="width: 80%; padding: 10px; border-radius: 4px; border: 1px solid #d3d3d3;">
-                    <option value="普通用户" class="delete">普通用户</option>
-                    <option value="vip用户" class="delete">vip用户</option>
+                    <option value="普通用户">普通用户</option>
+                    <option value="vip用户">vip用户</option>
                 </select>
             </div>
 
-            <div style="margin-bottom: 16px;" class="delete">
-                <label for="username" class="bt delete">昵 称</label>
+            <div style="margin-bottom: 16px;">
+                <label for="username" class="bt">昵 称</label>
                 <input type="text" id="username" name="username" maxlength="11" placeholder="输入账号ID">
             </div>
 
-            <div style="margin-bottom: 20px;" class="delete">
-                <label for="password" class="bt delete">密 码</label>
+            <div style="margin-bottom: 20px;">
+                <label for="password" class="bt">密 码</label>
                 <input type="password" id="password" name="password" placeholder="输入密码" required>
             </div>
 
-            <input type="submit" id="login" value="登录" class="delete">
+            <input type="submit" id="login" value="登录">
         </form>
 
-        <div style="text-align: center; margin-top: 16px;" class="delete">
-            <a href="register" class="delete" style="color: #0078d4; text-decoration: none;">没有账号？点这里注册！</a>
+        <div style="text-align: center; margin-top: 16px;">
+            <a href="register" style="color: #0078d4; text-decoration: none;">没有账号？点这里注册！</a>
         </div>
     </div>
     <!--在这继续添加-->
@@ -208,7 +189,7 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
 
-    <!-- <script>
+    <script>
         let errorDiv = null;
         let loginFailed = false;
 
@@ -305,29 +286,7 @@
                 .catch(error => {
                     console.error(error);
                 });
-        }); -->
-    <script>
-        // 创建美观的提示框
-        const alertDiv = document.createElement('div');
-        alertDiv.style.position = 'fixed';
-        alertDiv.style.top = '20px';
-        alertDiv.style.left = '50%';
-        alertDiv.style.transform = 'translateX(-50%)';
-        alertDiv.style.padding = '15px 25px';
-        alertDiv.style.backgroundColor = '#ffeb3b';
-        alertDiv.style.color = '#000';
-        alertDiv.style.borderRadius = '5px';
-        alertDiv.style.boxShadow = '0 4px 8px rgba(0,0,0,0.2)';
-        alertDiv.style.zIndex = '1000';
-        alertDiv.style.animation = 'fadeIn 0.5s';
-        alertDiv.innerHTML = '数据已从ZTG服务器迁移至ZIYIT根服务器，本网页已经停止支持，无法正常使用，请前往官网，数据已迁移至ZIYIT根服务器。本界面将在不在更新，建议前往官网查看最新内容。';
-        document.body.appendChild(alertDiv);
-                        
-        // 5秒后自动消失
-        setTimeout(() => {
-            alertDiv.style.animation = 'fadeOut 0.5s';
-            setTimeout(() => alertDiv.remove(), 500);
-        }, 5000);
+        });
     </script>
 </body>
 
